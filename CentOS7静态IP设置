@@ -1,0 +1,22 @@
+前提先设置好 VMware 虚拟网络按 VMnet8 方式连接
+
+CentOS7 设置静态IP
+1、ip addr （通过 ip 命令加参数 addr 则是查看当前网卡的配置信息）
+2、cat /etc/sysconfig/network-scripts/ifcfg-ens33 （通过 cat 查看CentOS7最小化安装默认网卡设备配置信息）
+3、vi /etc/sysconfig/network-scripts/ifcfg-ens33 （使用 vi 文本编辑器打开网卡设备文件）
+BOOTPROTO=static （设置网卡引导协议为 静态）
+ONBOOT=yes （设置网卡启动方式为 开机启动 并且可以通过系统服务管理器 systemctl 控制网卡）
+IPADDR=192.168.177.100
+NETMASK=255.255.255.0
+GATEWAY=192.168.177.2  和VM保持一致
+DNS1=119.29.29.29
+DNS2=8.8.8.8
+4、systemctl restart network （重启网络服务）
+5、ip addr （查看静态IP有没设置成功）
+6、ping www.baidu.com  测试网络
+
+
+参考：
+https://www.jb51.net/article/153656.htm
+https://www.cnblogs.com/yhongji/p/9336247.html
+https://www.cnblogs.com/toov5/p/10340395.html
